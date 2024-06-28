@@ -2,15 +2,15 @@ from solathon.core.instructions import transfer
 from solathon import Client, Transaction, PublicKey, Keypair
 
 
-def make_transactions(private_key: str):
-    client = Client("https://api.devnet.solana.com")
+def make_transactions(private_key: str, pbk1: str, pbk2: str, pbk3: str):
+    client = Client("https://api.mainnet-beta.solana.com")
 
     sender = Keypair.from_private_key(private_key)
-    receiver1 = PublicKey("4RCWU6r7oFaKKt5BbAWisiBsBscRpL2hDqv89Ric9v2r")
-    receiver2 = PublicKey("GUh1KwvgX5b2QFBG46KsCw43T3TRHZwer2oTRCPHRz8S")
-    receiver3 = PublicKey("98njFGB6xQ3TCv7FR7UhkNRiR2xuGwFYnPv6Gqy7kpXn")
+    receiver1 = PublicKey(pbk1)
+    receiver2 = PublicKey(pbk2)
+    receiver3 = PublicKey(pbk3)
     amount = 0.1  # solana
-
+    print('ALO')
     instruction1 = transfer(
         from_public_key=sender.public_key,
         to_public_key=receiver1,
