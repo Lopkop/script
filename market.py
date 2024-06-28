@@ -51,7 +51,7 @@ def load_phantom(private_key: str) -> None:
     driver.switch_to.window(driver.window_handles[0])
 
 
-def load_raydium() -> None:
+def create_market(base_coin: str, quote_token: str) -> None:
     driver.get('https://v2.raydium.io/create-market/')
     storage = LocalStorage(driver)
     storage["USER_AGREE_DISCLAIMER"] = 'true'
@@ -68,9 +68,10 @@ def load_raydium() -> None:
 
     click_button(By.CLASS_NAME, 'text-base', 0)
 
-    WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located((By.TAG_NAME, 'input')))
-    elem1 = driver.find_elements(By.TAG_NAME, 'input')
-    elem1[3].send_keys('So11111111111111111111111111111111111111112')  # mint address for base coin
+    # WebDriverWait(driver, 10).until(expected_conditions.visibility_of_element_located((By.TAG_NAME, 'input')))
+    # elem1 = driver.find_elements(By.TAG_NAME, 'input')
+    # elem1[3].send_keys('So11111111111111111111111111111111111111112')  # mint address for base coin
+    write_input(By.TAG_NAME, 'input', base_coin, 3)
 
     actions.send_keys(Keys.ENTER)
     actions.perform()
@@ -79,9 +80,9 @@ def load_raydium() -> None:
     # quote token:
     click_button(By.CLASS_NAME, 'text-base', 0)
 
-    write_input(By.TAG_NAME, 'input', 'RAY', 3)
+    write_input(By.TAG_NAME, 'input', quote_token, 3)
     actions.send_keys(Keys.ENTER)
     actions.perform()
-    time.sleep(4)
+    time.sleep(100)
 
     click_button(By.CLASS_NAME, 'Button', -1)
